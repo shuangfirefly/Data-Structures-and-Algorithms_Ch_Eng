@@ -1,0 +1,76 @@
+
+///题目网址： https://pintia.cn/problem-sets/15/problems/713
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+typedef struct HNode *Heap;
+struct HNode
+{
+    int *Data;
+    int Size;
+};
+
+#define MINDATA -10001;
+
+typedef Heap MinHeap;
+
+MinHeap CreatHeap(int MaxSize);
+
+void InsertHeap(MinHeap H, int X);
+
+int main(void)
+{
+    int M=0, N=0, i=0, Tmp=0;
+    MinHeap H=NULL;
+
+    scanf("%d%d", &N, &M);
+
+    H = CreatHeap(N);
+    for(i=0; i<N; i++)
+    {
+        scanf("%d", &Tmp);
+        InsertHeap(H, Tmp);
+    }
+
+    for(i=0; i<M; i++)
+    {
+        scanf("%d", &Tmp);
+        printf("%d", H->Data[Tmp]);
+        for(Tmp/=2; Tmp; Tmp/=2)
+            printf(" %d", H->Data[Tmp]);
+        if(i<M-1)
+            printf("\n");
+    }
+
+    free(H->Data);
+    free(H);
+
+    return 0;
+}
+
+MinHeap CreatHeap(int MaxSize)
+{
+    MinHeap H = NULL;
+
+    H = (MinHeap) calloc(1, sizeof(struct HNode));
+    H->Data = (int *) calloc(MaxSize+1, sizeof(int));
+    H->Size = 0;
+    H->Data[0] = MINDATA;
+    return H;
+}
+
+void InsertHeap(MinHeap H, int X)
+{
+    int i=0;
+
+    i = ++H->Size;
+
+    for(; H->Data[i/2]>X; i/=2)
+    {
+        H->Data[i] = H->Data[i/2];
+    }
+
+    H->Data[i] = X;
+}
