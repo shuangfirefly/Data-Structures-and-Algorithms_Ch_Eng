@@ -1,4 +1,4 @@
-# Data-Structures-and-Algorithms_English
+# Data-Structures-and-Algorithms
 
 这里将放在陈悦姥姥的 PTA 的Data Structures and Algorithms (English)上刷题的代码
 
